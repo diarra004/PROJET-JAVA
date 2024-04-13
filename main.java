@@ -25,7 +25,11 @@ public class main {
                 case 2:
                     gererEmprunts(bibliotheque, interfaceUtilisateur);
                     break;
-                case 3:
+                    case 3:
+                    gererUtilisateurs(bibliotheque, interfaceUtilisateur);
+                   
+                    break;
+                case 4:
                     quitter = true;
                     System.out.println("Merci d'avoir utilisé le gestionnaire de bibliothèque. À bientôt !");
                     break;
@@ -93,8 +97,8 @@ public class main {
         Livre nouveauLivre = new Livre(titre, auteur, anneePublication, isbn);
         bibliotheque.ajouterLivre(nouveauLivre);
         System.out.println("Livre ajouté avec succès !");
-    System.out.println("Livres dans la bibliothèque :");
-    interfaceUtilisateur.afficherLivres(bibliotheque.getLivres());
+        System.out.println("Livres dans la bibliothèque :");
+        interfaceUtilisateur.afficherLivres(bibliotheque.getLivres());
 
 
     }
@@ -149,6 +153,58 @@ public class main {
             System.out.println("Numéro de livre invalide.");
         }
     }
+    private static void gererUtilisateurs(Bibliotheque bibliotheque, InterfaceUtilisateur interfaceUtilisateur) {
+        boolean retourMenuPrincipal = false;
+    
+        while (!retourMenuPrincipal) {
+            interfaceUtilisateur.afficherMenuGestionUtilisateurs();
+            int choixGestionUtilisateurs = interfaceUtilisateur.saisirEntier("Choix");
+    
+            switch (choixGestionUtilisateurs) {
+                case 1:
+                    ajouterUtilisateur(bibliotheque, interfaceUtilisateur);
+                    break;
+                case 2:
+                    supprimerUtilisateur(bibliotheque, interfaceUtilisateur);
+                    break;
+                case 3:
+                    retourMenuPrincipal = true;
+                    break;
+                default:
+                    System.out.println("Choix invalide. Veuillez réessayer.");
+            }
+        }
+    }
+    
+
+    public static void ajouterUtilisateur(Bibliotheque bibliotheque, InterfaceUtilisateur interfaceUtilisateur) {
+        String nom = interfaceUtilisateur.saisirString("Entrez le nom de l'utilisateur :");
+        int numeroIdentification = interfaceUtilisateur.saisirEntier("Entrez l'identifiant de l'utilisateur :");
+        boolean estAJourCotisation = interfaceUtilisateur.saisirBoolean("L'utilisateur est-il à jour par rapport à ses cotisations ? ");
+
+    
+        Utilisateur nouvelUtilisateur = new Utilisateur(nom, numeroIdentification);
+        nouvelUtilisateur.setEstAJourCotisation(estAJourCotisation);
+        bibliotheque.ajouterUtilisateur(nouvelUtilisateur);
+    
+        System.out.println("Utilisateur ajouté avec succès !");
+        List<Utilisateur> utilisateurs = bibliotheque.getUtilisateurs();
+    interfaceUtilisateur.afficherUtilisateurs(utilisateurs);
+    }
+    
+    public static void supprimerUtilisateur(Bibliotheque bibliotheque, InterfaceUtilisateur interfaceUtilisateur) {
+        int identifiant = interfaceUtilisateur.saisirEntier("Entrez l'identifiant de l'utilisateur à supprimer :");
+        boolean utilisateurSupprime = bibliotheque.supprimerUtilisateur(identifiant);
+    
+        if (utilisateurSupprime) {
+            System.out.println("Utilisateur supprimé avec succès !");
+            List<Utilisateur> utilisateurs = bibliotheque.getUtilisateurs();
+    interfaceUtilisateur.afficherUtilisateurs(utilisateurs);
+        } else {
+            System.out.println("Aucun utilisateur trouvé avec cet identifiant.");
+        }
+    }
+    
 
     
 }

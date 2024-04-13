@@ -4,12 +4,20 @@ public class Utilisateur {
     private String nom;
     private int numeroIdentification;
     private ArrayList<Livre> livresEmpruntes;
+    private boolean estAJourCotisation;
 
     // Constructeur
     public Utilisateur(String nom, int numeroIdentification) {
         this.nom = nom;
         this.numeroIdentification = numeroIdentification;
         this.livresEmpruntes = new ArrayList<>();
+    }
+    public boolean isEstAJourCotisation() {
+        return estAJourCotisation;
+    }
+
+    public void setEstAJourCotisation(boolean estAJourCotisation) {
+        this.estAJourCotisation = estAJourCotisation;
     }
     // Méthode pour obtenir le nom de l'utilisateur
     public String getNom() {
@@ -39,5 +47,13 @@ public class Utilisateur {
         for (Livre livre : livresEmpruntes) {
             System.out.println("- " + livre.getTitre());
         }
+    }
+
+    public String toString() {
+        return "Utilisateur{" +
+                "nom='" + nom + '\'' +
+                ", identifiant=" + numeroIdentification +
+              
+                '}';
     }
 }

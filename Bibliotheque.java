@@ -7,6 +7,9 @@ import java.io.*;
 
 
 public class Bibliotheque implements Serializable {
+
+    private List<Utilisateur> utilisateurs;
+    
     private static final long serialVersionUID = 1L;
 
     private ArrayList<Livre> listeLivres;
@@ -19,8 +22,25 @@ public class Bibliotheque implements Serializable {
     public Bibliotheque() {
         this.listeLivres = new ArrayList<>();
         this.empruntsUtilisateurs = new HashMap<>();
+        this.utilisateurs = new ArrayList<>();
+    }
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+        utilisateurs.add(utilisateur);
+    }
+    public boolean supprimerUtilisateur(int identifiant) {
+        for (Utilisateur utilisateur : utilisateurs) {
+            if (utilisateur.getNumeroIdentification() == identifiant) {
+                utilisateurs.remove(utilisateur);
+                return true;
+            }
+        }
+        return false;
     }
 
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+    
     public void ajouterLivre(Livre livre) {
         listeLivres.add(livre);
     }
@@ -41,9 +61,11 @@ public class Bibliotheque implements Serializable {
     }
 
     public void enregistrerEmprunt(Utilisateur utilisateur, Livre livre) {
+
         if (!empruntsUtilisateurs.containsKey(utilisateur)) {
             empruntsUtilisateurs.put(utilisateur, new ArrayList<>());
         }
+
         empruntsUtilisateurs.get(utilisateur).add(livre);
     }
 
