@@ -9,9 +9,15 @@ public class CLIUtilisateur implements InterfaceUtilisateur {
         this.scanner = new Scanner(System.in);
     }
 
+    @Override
+    public String saisirString(String message) {
+        System.out.print(message + ":"); // Affiche le message d'invitation avec un espace à la fin
+        return scanner.nextLine(); // Récupère la saisie de l'utilisateur sur la même ligne
+    }
+
     public Utilisateur saisirInformationsUtilisateur() {
         System.out.println("===== Bienvenue dans le gestionnaire de bibliothèque =====");
-        String nom = saisirString("Entrez votre nom :");
+        String nom = saisirString("Entrez votre nom ");
         int numeroIdentification = saisirEntier("Entrez votre numéro d'identification :");
         return new Utilisateur(nom, numeroIdentification);
     }
@@ -30,6 +36,8 @@ public class CLIUtilisateur implements InterfaceUtilisateur {
         System.out.println("===== Gestion des Livres =====");
         System.out.println("1. Ajouter un livre");
         System.out.println("2. Rechercher un livre");
+        System.out.println("3. Modifier un livre existant");
+        System.out.println("4. Supprimer un livre existant");
         System.out.println("3. Retour au menu principal");
     }
 
@@ -60,11 +68,7 @@ public class CLIUtilisateur implements InterfaceUtilisateur {
         System.out.println("=============================");
     }
 
-    @Override
-    public String saisirString(String message) {
-        System.out.print(message + ": ");
-        return scanner.nextLine();
-    }
+    
 
     @Override
     public int saisirEntier(String message) {

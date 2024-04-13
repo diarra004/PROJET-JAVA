@@ -5,6 +5,7 @@ import java.io.Serializable;
 import java.io.*;
 
 
+
 public class Bibliotheque implements Serializable {
     private static final long serialVersionUID = 1L;
 
@@ -31,12 +32,11 @@ public class Bibliotheque implements Serializable {
     public ArrayList<Livre> rechercherLivres(String critere) {
         ArrayList<Livre> resultats = new ArrayList<>();
         for (Livre livre : listeLivres) {
-            if (livre.getTitre().contains(critere) ||
-                livre.getAuteur().contains(critere) ||
-                livre.getIsbn().contains(critere)) {
+            if (livre.getTitre().toLowerCase().contains(critere)
+            || livre.getAuteur().toLowerCase().contains(critere)
+            || livre.getIsbn().toLowerCase().contains(critere)) {
                 resultats.add(livre);
-            }
-        }
+        }}
         return resultats;
     }
 
@@ -90,5 +90,63 @@ public class Bibliotheque implements Serializable {
         return bibliotheque;
     }
 
+    public void modifierLivre(Livre livreAModifier, InterfaceUtilisateur interfaceUtilisateur) {
+        System.out.println("Livre à modifier : " + livreAModifier);
+    
+        // Afficher les options de modification
+        System.out.println("Quel attribut souhaitez-vous modifier ?");
+        System.out.println("1. Titre");
+        System.out.println("2. Auteur");
+        System.out.println("3. Année de publication");
+        System.out.println("4. ISBN");
+        System.out.println("5. Retour au menu");
+    
+        int choix = interfaceUtilisateur.saisirEntier("Choix");
+    
+        switch (choix) {
+            case 1:
+
+                String nouveauTitre = interfaceUtilisateur.saisirString("Nouveau titre du livre ");
+                interfaceUtilisateur.saisirString("");
+                livreAModifier.setTitre(nouveauTitre);
+                break;
+            case 2:
+                String nouvelAuteur = interfaceUtilisateur.saisirString("Nouvel auteur du livre :");
+               
+                interfaceUtilisateur.saisirString("");
+                livreAModifier.setAuteur(nouvelAuteur);
+                break;
+            case 3:
+            
+               
+                int nouvelleAnnee = interfaceUtilisateur.saisirEntier("Nouvelle année de publication du livre :");
+                interfaceUtilisateur.saisirString("");
+                
+                livreAModifier.setAnneePublication(nouvelleAnnee);
+                break;
+            case 4:
+               
+                String nouveauISBN = interfaceUtilisateur.saisirString("Nouvel ISBN du livre :");
+                interfaceUtilisateur.saisirString("");
+               
+                livreAModifier.setIsbn(nouveauISBN);
+                break;
+            case 5:
+                System.out.println("Retour au menu principal.");
+                return;
+            default:
+                System.out.println("Choix invalide. Veuillez réessayer.");
+                break;
+        }
+    
+        System.out.println("Livre modifié avec succès : " + livreAModifier);
+    }
+
+    
+
+    
+
 
 }
+
+
