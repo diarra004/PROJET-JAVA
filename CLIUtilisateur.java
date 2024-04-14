@@ -22,6 +22,7 @@ public class CLIUtilisateur implements InterfaceUtilisateur {
         return new Utilisateur(nom, numeroIdentification);
     }
     
+    
 
     @Override
     public void afficherMenuPrincipal() {
