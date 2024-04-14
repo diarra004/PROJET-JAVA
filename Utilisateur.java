@@ -4,6 +4,7 @@ public class Utilisateur {
     private String nom;
     private int numeroIdentification;
     private ArrayList<Livre> livresEmpruntes;
+    private boolean estAJourCotisation;
 
     // Constructeur
     public Utilisateur(String nom, int numeroIdentification) {
@@ -11,15 +12,24 @@ public class Utilisateur {
         this.numeroIdentification = numeroIdentification;
         this.livresEmpruntes = new ArrayList<>();
     }
+    public boolean getCotisation() {
+        return estAJourCotisation;
+    }
+
+    public void setEstAJourCotisation(boolean estAJourCotisation) {
+        this.estAJourCotisation = estAJourCotisation;
+    }
     // Méthode pour obtenir le nom de l'utilisateur
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     // Méthode pour obtenir le numéro d'identification de l'utilisateur
     public int getNumeroIdentification() {
-        return numeroIdentification;
+        return this.numeroIdentification;
     }
+
+    
     
 
 
@@ -39,5 +49,13 @@ public class Utilisateur {
         for (Livre livre : livresEmpruntes) {
             System.out.println("- " + livre.getTitre());
         }
+    }
+
+    public String toString() {
+        return "Utilisateur{" +
+                "nom='" + nom + '\'' +
+                ", identifiant=" + numeroIdentification +
+              
+                '}';
     }
 }

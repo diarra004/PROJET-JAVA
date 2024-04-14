@@ -1,12 +1,16 @@
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.io.Serializable;
 import java.io.*;
 
 
 
 public class Bibliotheque implements Serializable {
+
+    private List<Utilisateur> utilisateurs;
+    
     private static final long serialVersionUID = 1L;
 
     private ArrayList<Livre> listeLivres;
@@ -19,8 +23,25 @@ public class Bibliotheque implements Serializable {
     public Bibliotheque() {
         this.listeLivres = new ArrayList<>();
         this.empruntsUtilisateurs = new HashMap<>();
+        this.utilisateurs = new ArrayList<>();
+    }
+    public void ajouterUtilisateur(Utilisateur utilisateur) {
+        utilisateurs.add(utilisateur);
+    }
+    public boolean supprimerUtilisateur(int identifiant) {
+        for (Utilisateur utilisateur : utilisateurs) {
+            if (utilisateur.getNumeroIdentification() == identifiant) {
+                utilisateurs.remove(utilisateur);
+                return true;
+            }
+        }
+        return false;
     }
 
+    public List<Utilisateur> getUtilisateurs() {
+        return utilisateurs;
+    }
+    
     public void ajouterLivre(Livre livre) {
         listeLivres.add(livre);
     }
@@ -39,12 +60,23 @@ public class Bibliotheque implements Serializable {
         }}
         return resultats;
     }
-
-    public void enregistrerEmprunt(Utilisateur utilisateur, Livre livre) {
-        if (!empruntsUtilisateurs.containsKey(utilisateur)) {
-            empruntsUtilisateurs.put(utilisateur, new ArrayList<>());
+    public Utilisateur chercherUtilisateur(int id) {
+        for (Utilisateur utilisateur : utilisateurs) {
+            if (utilisateur.getNumeroIdentification()==id) {
+                 return utilisateur;
+            }
         }
-        empruntsUtilisateurs.get(utilisateur).add(livre);
+        return null;
+    }
+    public void enregistrerEmprunt(Utilisateur utilisateur, Livre livre) {
+        
+        if(utilisateur.getCotisation()){
+            if (!empruntsUtilisateurs.containsKey(utilisateur)) {
+                empruntsUtilisateurs.put(utilisateur, new ArrayList<>());
+            }
+    
+            empruntsUtilisateurs.get(utilisateur).add(livre);
+        }
     }
 
     public void enregistrerRetour(Utilisateur utilisateur, Livre livre) {
@@ -53,10 +85,6 @@ public class Bibliotheque implements Serializable {
         }
     }
 
-    public boolean verifierEligibilite(Utilisateur utilisateur) {
-        // Implémentez vos règles d'éligibilité ici
-        return true; // Exemple simplifié pour toujours autoriser l'emprunt
-    }
 
     public void afficherStatistiques() {
         int totalLivres = listeLivres.size();
@@ -89,7 +117,14 @@ public class Bibliotheque implements Serializable {
         }
         return bibliotheque;
     }
-
+    public Livre chercherLivre(String s){
+        for (Livre livre : listeLivres) {
+            if (livre.getIsbn().equals(s)) {
+                return livre;
+            }
+        }
+        return null;
+    }
     public void modifierLivre(Livre livreAModifier, InterfaceUtilisateur interfaceUtilisateur) {
         System.out.println("Livre à modifier : " + livreAModifier);
     
@@ -143,9 +178,20 @@ public class Bibliotheque implements Serializable {
     }
 
     
-
     
-
+    public void afficherEmprunts() {
+        for (Map.Entry<Utilisateur, ArrayList<Livre>> entry : empruntsUtilisateurs.entrySet()) {
+            Utilisateur utilisateur = entry.getKey();
+            ArrayList<Livre> emprunts = entry.getValue();
+    
+            System.out.println("Utilisateur: " + utilisateur.getNom());
+            System.out.println("Emprunts:");
+    
+            for (Livre livre : emprunts) {
+                System.out.println("- " + livre.getTitre());
+            }
+        }
+    }
 
 }
 
