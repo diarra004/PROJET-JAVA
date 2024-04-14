@@ -12,7 +12,7 @@ public class Utilisateur {
         this.numeroIdentification = numeroIdentification;
         this.livresEmpruntes = new ArrayList<>();
     }
-    public boolean isEstAJourCotisation() {
+    public boolean getCotisation() {
         return estAJourCotisation;
     }
 
@@ -21,13 +21,15 @@ public class Utilisateur {
     }
     // Méthode pour obtenir le nom de l'utilisateur
     public String getNom() {
-        return nom;
+        return this.nom;
     }
 
     // Méthode pour obtenir le numéro d'identification de l'utilisateur
     public int getNumeroIdentification() {
-        return numeroIdentification;
+        return this.numeroIdentification;
     }
+
+    
     
 
 

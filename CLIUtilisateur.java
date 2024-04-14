@@ -45,7 +45,8 @@ public boolean saisirBoolean(String message) {
         System.out.println("1. Gestion des Livres");
         System.out.println("2. Gestion des Emprunts");
         System.out.println("3. Gestion des Utilisateurs");
-        System.out.println("4. Quitter");
+        System.out.println("4. Afficher les statistiques de la Biblioteque");
+        System.out.println("5. Quitter");
     }
 
 
@@ -75,7 +76,10 @@ public boolean saisirBoolean(String message) {
     System.out.println("===== Gestion des Utilisateurs =====");
     System.out.println("1. Ajouter un utilisateur");
     System.out.println("2. Supprimer un utilisateur");
-    System.out.println("3. Retour au menu principal");
+    System.out.println("3. Afficher Liste utilisateur");
+    System.out.println("4. Retour au menu principal");
+
+
 }
 
 
@@ -114,7 +118,7 @@ public boolean saisirBoolean(String message) {
 public void afficherUtilisateurs(List<Utilisateur> utilisateurs) {
     System.out.println("===== Liste des Utilisateurs =====");
     for (Utilisateur utilisateur : utilisateurs) {
-        String etatCotisation = utilisateur.isEstAJourCotisation() ? "à jour" : "pas à jour";
+        String etatCotisation = utilisateur.getCotisation() ? "à jour" : "pas à jour";
         System.out.println(utilisateur.getNom() + " - Cotisations : " + etatCotisation);
     }
     System.out.println("=============================");
