@@ -86,11 +86,11 @@ public class main {
 
         
         String titre = interfaceUtilisateur.saisirString("Titre");
-        interfaceUtilisateur.saisirString(""); 
+       
        
         String auteur = interfaceUtilisateur.saisirString("Auteur");
         int anneePublication = interfaceUtilisateur.saisirEntier("Année de publication");
-        interfaceUtilisateur.saisirString(""); 
+       
 
         String isbn = interfaceUtilisateur.saisirString("ISBN");
 
@@ -110,7 +110,8 @@ public class main {
        
 
         interfaceUtilisateur.saisirString("Entrez le titre, l'auteur ou l'ISBN du livre: ");
-        String critere = interfaceUtilisateur.saisirString("");// Lire la saisie de l'utilisateur
+       
+        // Lire la saisie de l'utilisateur
         
        
 

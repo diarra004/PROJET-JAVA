@@ -129,7 +129,7 @@ public class Bibliotheque implements Serializable {
             case 1:
 
                 String nouveauTitre = interfaceUtilisateur.saisirString("Nouveau titre du livre ");
-                interfaceUtilisateur.saisirString("");
+               
                 livreAModifier.setTitre(nouveauTitre);
                 break;
             case 2:
