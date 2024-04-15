@@ -86,11 +86,11 @@ public class main {
     private static void ajouterLivre(Bibliotheque bibliotheque, InterfaceUtilisateur interfaceUtilisateur) {
 
         String titre = interfaceUtilisateur.saisirString("Titre");
-        interfaceUtilisateur.saisirString("");
+        // interfaceUtilisateur.saisirString("");
 
         String auteur = interfaceUtilisateur.saisirString("Auteur");
         int anneePublication = interfaceUtilisateur.saisirEntier("Année de publication");
-        interfaceUtilisateur.saisirString("");
+        // interfaceUtilisateur.saisirString("");
 
         String isbn = interfaceUtilisateur.saisirString("ISBN");
 
@@ -104,8 +104,7 @@ public class main {
 
     private static void rechercherLivre(Bibliotheque bibliotheque, InterfaceUtilisateur interfaceUtilisateur) {
 
-        interfaceUtilisateur.saisirString("Entrez le titre, l'auteur ou l'ISBN du livre: ");
-        String critere = interfaceUtilisateur.saisirString("");// Lire la saisie de l'utilisateur
+        String critere = interfaceUtilisateur.saisirString("Entrez le titre, l'auteur ou l'ISBN du livre: ");// Lire la saisie de l'utilisateur
 
         List<Livre> resultats = bibliotheque.rechercherLivres(critere);
 
@@ -138,7 +137,7 @@ public class main {
                     break;
                 case 2:
                     int Id =interfaceUtilisateur.saisirEntier("Donner l'id de l'utilisateur");
-                    String B =interfaceUtilisateur.saisirString("Donner l'isbn ou le titre du livre a Emprunter");
+                    String B =interfaceUtilisateur.saisirString("Donner l'isbn ou le titre du livre a Retourner");
             
                     bibliotheque.enregistrerRetour(bibliotheque.chercherUtilisateur(Id),bibliotheque.chercherLivre(B));
                     System.out.println("operation effectue avec success");
@@ -195,10 +194,15 @@ public class main {
                     supprimerUtilisateur(bibliotheque, interfaceUtilisateur);
                     break;
                 case 3:
-                    retourMenuPrincipal = true;
+                   interfaceUtilisateur.afficherUtilisateurs(bibliotheque.getUtilisateurs());;
                     break;
                 case 4:
-                    bibliotheque.getUtilisateurs();
+                    int id= interfaceUtilisateur.saisirEntier("Donner l'identifiant de l'utilisateur");
+
+                    interfaceUtilisateur.afficherLivresEmpruntes(bibliotheque.chercherUtilisateur(id), bibliotheque.getLivres());
+                    break;
+                case 5:
+                    retourMenuPrincipal = true;
                     break;
                 default:
                     System.out.println("Choix invalide. Veuillez réessayer.");

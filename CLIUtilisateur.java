@@ -25,16 +25,22 @@ public boolean saisirBoolean(String message) {
 }
 
 
-    @Override
-    public String saisirString(String message) {
-        System.out.print(message + ":"); // Affiche le message d'invitation avec un espace à la fin
-        return scanner.nextLine(); // Récupère la saisie de l'utilisateur sur la même ligne
+@Override
+public String saisirString(String message) {
+    System.out.print(message + ": "); // Affiche le message d'invitation avec un espace à la fin
+    String input = scanner.nextLine();
+    if (input.isEmpty()) {
+        System.out.println("Réponse invalide. Veuillez saisir une valeur.");
+        return saisirString(message); // Redemande la saisie récursivement en cas de réponse invalide
+    } else {
+        return input;
     }
+}
 
     public Utilisateur saisirInformationsUtilisateur() {
         System.out.println("===== Bienvenue dans le gestionnaire de bibliothèque =====");
-        String nom = saisirString("Entrez votre nom ");
-        int numeroIdentification = saisirEntier("Entrez votre numéro d'identification :");
+        String nom = saisirString("Entrez votre Email ");
+        int numeroIdentification = saisirEntier("Entrez votre ID :");
         return new Utilisateur(nom, numeroIdentification);
     }
     
@@ -78,7 +84,8 @@ public boolean saisirBoolean(String message) {
     System.out.println("1. Ajouter un utilisateur");
     System.out.println("2. Supprimer un utilisateur");
     System.out.println("3. Afficher Liste utilisateur");
-    System.out.println("4. Retour au menu principal");
+    System.out.println("4. Afficher les livres emprunter par un utilisateur donne");
+    System.out.println("5. Retour au menu principal");
 
 
 }

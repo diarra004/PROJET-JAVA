@@ -184,9 +184,8 @@ public class Bibliotheque implements Serializable {
             Utilisateur utilisateur = entry.getKey();
             ArrayList<Livre> emprunts = entry.getValue();
     
-            System.out.println("Utilisateur: " + utilisateur.getNom());
+            // System.out.println("Utilisateur: " + utilisateur.getNom());
             System.out.println("Emprunts:");
-    
             for (Livre livre : emprunts) {
                 System.out.println("- " + livre.getTitre());
             }
